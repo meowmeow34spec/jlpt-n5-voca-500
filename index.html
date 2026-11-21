@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="midnight-sakura">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>PRISM NIHONGO N5 — JLPT N5 필수 500단어 사쿠라 글래스모피즘 미니게임</title>
+  <meta name="description" content="10개씩 외우고 3-Wave 실전 배틀(한자 읽기 · 매트릭스 매칭 · 가나 샤드 & 로마자 타이핑)로 정복하는 일본어 JLPT N5 필수 500단어 사쿠라 오로라 글래스모피즘 미니게임" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='sg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff7eb3'/%3E%3Cstop offset='50%25' stop-color='%23a78bfa'/%3E%3Cstop offset='100%25' stop-color='%2338bdf8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points='32,4 58,22 48,58 16,58 6,22' fill='url(%23sg)' stroke='%23ffffff' stroke-width='3'/%3E%3Ctext x='32' y='41' font-size='24' font-weight='900' text-anchor='middle' fill='%23ffffff' font-family='sans-serif'%3E%E3%81%82%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="src/css/glassmorphism.css" />
+  <link rel="stylesheet" href="src/css/animations.css" />
+</head>
+<body>
+  <!-- Living Sakura Aurora & Kyoto Crystal Mesh Background -->
+  <div class="aurora-stage" aria-hidden="true">
+    <div class="aurora-orb aurora-orb--1"></div>
+    <div class="aurora-orb aurora-orb--2"></div>
+    <div class="aurora-orb aurora-orb--3"></div>
+    <div class="aurora-orb aurora-orb--4"></div>
+    <div class="aurora-grid-overlay"></div>
+  </div>
+
+  <!-- Sakura Petal & Prism Crystal Particle Layer -->
+  <canvas id="fx-canvas" aria-hidden="true"></canvas>
+
+  <!-- Main Application Shell -->
+  <div class="app-shell">
+    <!-- Sticky Frosted Top Navigation -->
+    <header class="top-nav glass-panel" role="banner">
+      <button type="button" class="brand-logo" data-action="back-to-lobby" aria-label="PRISM NIHONGO N5 로비로 이동">
+        <span class="brand-gem" aria-hidden="true">桜</span>
+        <span>
+          <span class="brand-title">PRISM NIHONGO N5</span>
+          <span class="brand-sub">JLPT N5 필수 500단어 · 사쿠라 프리즘</span>
+        </span>
+      </button>
+
+      <div class="nav-stats">
+        <span class="glass-pill" title="연속 학습 일수">
+          🔥 <span id="nav-streak">1</span><span class="nav-hide-sm">일 연속</span>
+        </span>
+        <span class="glass-pill" title="마스터한 JLPT N5 단어 수">
+          🌸 <span id="nav-mastered">0</span><span>/<span id="nav-total-words">500</span></span>
+        </span>
+        <span class="glass-pill nav-hide-sm" title="누적 총점">
+          🏆 <span id="nav-total-score">0</span>점
+        </span>
+      </div>
+
+      <nav class="nav-actions" aria-label="학습 및 설정 도구">
+        <button type="button" id="btn-open-gojuon" class="btn-glass btn-compact" data-action="open-gojuon" title="오십음도(히라가나·가타카나·탁음·요음) 발음 치트시트">
+          <span>あ/ア</span><span class="nav-hide-md">오십음도</span>
+        </button>
+        <button type="button" id="btn-open-codex" class="btn-glass btn-compact" data-action="open-codex" title="JLPT N5 500단어 프리즘 도감">
+          📖 <span class="nav-hide-md">도감</span>
+        </button>
+        <button type="button" id="btn-open-badges" class="btn-glass btn-icon" data-action="open-badges" title="업적 배지 및 데이터 관리" aria-label="업적 배지 보기">
+          🏅
+        </button>
+        <button type="button" id="btn-toggle-tts-speed" class="btn-glass btn-compact nav-hide-sm" data-action="toggle-tts-speed" title="일본어(ja-JP) 발음 재생 속도 전환 (1.0x ↔ 0.78x)">
+          1.0x
+        </button>
+        <button type="button" id="btn-toggle-tts" class="btn-glass btn-icon" data-action="toggle-tts" title="일본어 원어민 발음(TTS) 켜기/끄기" aria-label="음성 발음 토글">
+          🗣️
+        </button>
+        <button type="button" id="btn-toggle-mute" class="btn-glass btn-icon" data-action="toggle-mute" title="사쿠라 크리스탈 효과음 켜기/끄기" aria-label="효과음 음소거 토글">
+          🔊
+        </button>
+        <button type="button" id="btn-toggle-theme" class="btn-glass btn-icon" data-action="toggle-theme" title="미드나잇 사쿠라 / 크리스탈 사쿠라 데이 테마 전환" aria-label="테마 전환">
+          🌙
+        </button>
+      </nav>
+    </header>
+
+    <!-- ==================================================================
+         SCREEN 1: LOBBY (Hero Dashboard + 3 Modes + 50-Round N5 World Map)
+         ================================================================== -->
+    <main id="screen-lobby" class="screen-view is-active" data-screen="lobby">
+      <section class="lobby-hero glass-panel">
+        <div class="hero-copy">
+          <span class="hero-eyebrow">🌸 10단어 후리가나 기억 공방 → 3-Wave 실전 인출 배틀</span>
+          <h1 class="hero-title">눈과 귀와 손끝에 각인되는<br />일본어 JLPT N5 필수 500단어</h1>
+          <p class="hero-desc">
+            45초 동안 4단 후리가나 성에 마스킹으로 10개 어휘를 익히고, 한자 읽기 함정 · 사쿠라 매트릭스 매칭 · 영문 로마자 직결 가나 샤드 웨이브를 돌파해 S+ 랭크를 달성하세요!
+          </p>
+          <div class="hero-cta-row">
+            <button type="button" id="btn-hero-start" class="btn-prism" data-action="start-recommended" data-round="1">
+              🌸 <span id="hero-start-label">Round 1 출격하기</span>
+            </button>
+            <button type="button" class="btn-glass" data-action="open-gojuon">
+              あ/ア 오십음도 치트시트
+            </button>
+            <button type="button" class="btn-glass" data-action="open-codex">
+              📖 N5 500단어 도감
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-dashboard">
+          <div class="mastery-bar-header">
+            <span id="hero-mastery-title">전체 500단어 N5 마스터리</span>
+            <span id="hero-mastery-percent">0.0% 정복</span>
+          </div>
+          <div class="mastery-track" role="progressbar" aria-valuemin="0" aria-valuemax="500" aria-valuenow="0" id="hero-mastery-progressbar">
+            <div id="hero-mastered-bar" class="mastery-fill-mastered" style="width: 0%"></div>
+            <div id="hero-learning-bar" class="mastery-fill-learning" style="width: 0%"></div>
+          </div>
+          <div class="hero-mini-kpis">
+            <div class="kpi-box">
+              <span id="kpi-cleared-rounds" class="kpi-val">0/50</span>
+              <span class="kpi-label">클리어 라운드</span>
+            </div>
+            <div class="kpi-box">
+              <span id="kpi-learning-words" class="kpi-val">0</span>
+              <span class="kpi-label">학습·마스터</span>
+            </div>
+            <div class="kpi-box">
+              <span id="kpi-best-combo" class="kpi-val">0</span>
+              <span class="kpi-label">최고 콤보</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 Game Mode Cards -->
+      <section class="mode-cards-grid" aria-label="게임 모드 선택">
+        <button type="button" class="glass-card mode-card is-selected" data-action="focus-worldmap">
+          <div class="mode-card__top">
+            <span class="mode-card__icon">⛩️</span>
+            <span id="campaign-total-badge" class="mode-card__badge">50 ROUNDS · 500단어</span>
+          </div>
+          <div>
+            <div class="mode-card__title">50라운드 N5 프리즘 월드맵</div>
+            <p class="mode-card__desc">입문 인사·숫자부터 실전 한자·가타카나까지 테마별 10단어 암기 후 3-Wave 배틀을 정복하세요.</p>
+          </div>
+        </button>
+
+        <button type="button" id="btn-start-revenge" class="glass-card mode-card" data-action="start-revenge">
+          <div class="mode-card__top">
+            <span class="mode-card__icon">🔥</span>
+            <span id="revenge-count-badge" class="mode-card__badge">약점 0개 대기</span>
+          </div>
+          <div>
+            <div class="mode-card__title">오답 · ⭐별표 복수 도장</div>
+            <p class="mode-card__desc">장음·촉음에서 틀렸던 단어와 별표(Pin) 마킹한 약점 어휘만 최대 10개 모아 집중 격파합니다.</p>
+          </div>
+        </button>
+
+        <button type="button" id="btn-start-survival" class="glass-card mode-card" data-action="start-survival">
+          <div class="mode-card__top">
+            <span class="mode-card__icon">⚡</span>
+            <span id="survival-best-badge" class="mode-card__badge">BEST 0점</span>
+          </div>
+          <div>
+            <div class="mode-card__title">무한 서바이벌 블리츠</div>
+            <p class="mode-card__desc">암기 시간 없이 500단어 전체에서 쏟아지는 N5 실전 기출 스피드전! 하트 3개로 한계에 도전하세요.</p>
+          </div>
+        </button>
+      </section>
+
+      <!-- 50-Round World Map Selector -->
+      <section id="worldmap-section" class="worldmap-panel glass-panel" aria-label="50라운드 스테이지 선택">
+        <div class="worldmap-toolbar">
+          <div class="segmented-tabs" role="tablist" aria-label="JLPT N5 레벨 필터">
+            <button type="button" class="seg-tab is-active" data-action="filter-level" data-level="all">전체 50R</button>
+            <button type="button" class="seg-tab" data-action="filter-level" data-level="1">🌸 Lv.1 입문 기초 (R1~20)</button>
+            <button type="button" class="seg-tab" data-action="filter-level" data-level="2">🎐 Lv.2 핵심 활용 (R21~38)</button>
+            <button type="button" class="seg-tab" data-action="filter-level" data-level="3">⛩️ Lv.3 실전 완성 (R39~50)</button>
+          </div>
+
+          <div class="lobby-options-bar">
+            <label class="option-group" for="select-memorize-sec">
+              <span>⏱️ 암기 시간</span>
+              <select id="select-memorize-sec" class="glass-select">
+                <option value="30">30초 (스피드)</option>
+                <option value="45" selected>45초 (표준)</option>
+                <option value="60">60초 (여유)</option>
+              </select>
+            </label>
+            <label class="option-group" for="select-battle-style">
+              <span>🎮 배틀 스타일</span>
+              <select id="select-battle-style" class="glass-select">
+                <option value="prism-mix" selected>3-Wave 통합전 (추천)</option>
+                <option value="reading-only">한자 읽기·가나 특훈</option>
+                <option value="quiz-only">실전 4지선다 집중</option>
+                <option value="match-only">사쿠라 페어 매칭 집중</option>
+                <option value="kana-only">가나 샤드·로마자 집중</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div id="rounds-grid" class="rounds-grid"></div>
+      </section>
+    </main>
+
+    <!-- ==================================================================
+         SCREEN 2: STUDY PHASE ("10-Word Sakura Prism Memory Workshop")
+         ================================================================== -->
+    <section id="screen-study" class="screen-view" data-screen="study" hidden>
+      <div class="study-header glass-panel">
+        <div class="study-meta">
+          <div class="study-round-badge">
+            <button type="button" class="btn-glass btn-xs" data-action="back-to-lobby">← 로비</button>
+            <span id="study-round-label">ROUND 1 · Lv.1</span>
+          </div>
+          <h2 id="study-round-title" class="study-title">👩‍🏫 설레는 첫인사와 교실 사람 (10단어 암기 공방)</h2>
+        </div>
+
+        <div class="study-timer-cluster">
+          <div id="study-ring-timer" class="ring-timer" title="남은 암기 시간">
+            <svg viewBox="0 0 68 68" aria-hidden="true">
+              <circle class="ring-timer__bg" cx="34" cy="34" r="30"></circle>
+              <circle id="study-ring-progress" class="ring-timer__progress" cx="34" cy="34" r="30"></circle>
+            </svg>
+            <span id="study-timer-sec" class="ring-timer__text">45s</span>
+          </div>
+
+          <button type="button" id="btn-extend-time" class="btn-glass" data-action="extend-time">
+            +15초 연장
+          </button>
+
+          <button type="button" id="btn-start-battle-early" class="btn-prism" data-action="start-battle-early">
+            <span>⚡ 다 외웠어요! 배틀 출격</span>
+            <small id="early-bonus-badge" class="early-bonus-sub">(조기 보너스 대기)</small>
+          </button>
+        </div>
+      </div>
+
+      <div id="study-mask-stage" data-mask="all" style="display: contents;">
+      <div class="study-toolbar glass-panel">
+        <div class="segmented-tabs" role="group" aria-label="4단 능동 인출 마스킹 모드">
+          <button type="button" class="seg-tab is-active" data-action="toggle-mask" data-mask="all">👀 전체 보기</button>
+          <button type="button" class="seg-tab" data-action="toggle-mask" data-mask="furigana">🈯 후리가나 가리기</button>
+          <button type="button" class="seg-tab" data-action="toggle-mask" data-mask="meaning">🌫️ 뜻 가리기</button>
+          <button type="button" class="seg-tab" data-action="toggle-mask" data-mask="japanese">🇯🇵 일본어 가리기</button>
+        </div>
+
+        <div class="study-toolbar__right">
+          <span id="study-pin-counter" class="pin-bounty-pill" title="헷갈리는 단어에 별표를 찍으면 배틀 정답 시 점수 2배!">
+            ⭐ 핀 바운티 0/3 (정답 시 x2.0!)
+          </span>
+          <div class="segmented-tabs" role="group" aria-label="카드 보기 방식">
+            <button type="button" class="seg-tab is-active" data-action="set-study-view" data-view="grid">10장 그리드</button>
+            <button type="button" class="seg-tab" data-action="set-study-view" data-view="focus">1장 집중 플립</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="study-cards-grid" class="study-cards-grid" data-mask="all"></div>
+      </div>
+
+      <div id="study-focus-controls" class="focus-nav-bar" hidden>
+        <button type="button" class="btn-glass" data-action="focus-prev">← 이전 단어</button>
+        <span id="study-focus-index" class="glass-pill">1 / 10</span>
+        <button type="button" class="btn-glass" data-action="focus-flip">↻ 카드 뒤집기 (Space)</button>
+        <button type="button" class="btn-glass" data-action="focus-next">다음 단어 →</button>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         SCREEN 3: BATTLE ARENA (3-Wave JLPT N5 Dynamic Mini-Games)
+         ================================================================== -->
+    <section id="screen-battle" class="screen-view" data-screen="battle" hidden>
+      <div class="battle-hud glass-panel">
+        <div class="battle-hud__top">
+          <div class="battle-hud__left">
+            <button type="button" class="btn-glass btn-xs" data-action="abort-lobby">✕ 나가기</button>
+            <span id="battle-wave-pill" class="wave-pill">WAVE 1 · 스피드 N5 실전 퀴즈</span>
+            <span id="battle-progress-pill" class="glass-pill">1 / 10</span>
+          </div>
+
+          <div class="hud-metrics">
+            <span id="battle-shields" class="shield-cluster" title="사쿠라 글래스 쉴드 (실수 시 콤보·하트 1회 보호)">🛡️×1</span>
+            <span id="battle-hearts" class="shield-cluster" hidden title="서바이벌 남은 하트">❤️❤️❤️</span>
+            <span id="battle-combo-pill" class="combo-pill">0 COMBO · x1.0</span>
+            <span id="battle-score" class="score-display">0</span>
+          </div>
+        </div>
+
+        <div class="hud-bars">
+          <div class="q-timer-track" title="남은 문제 제한 시간">
+            <div id="battle-q-timer-fill" class="q-timer-fill" style="width: 100%"></div>
+          </div>
+          <div class="fever-track" title="SAKURA FEVER 게이지 (100% 달성 시 12초간 점수 2배 & 타이머 감속!)">
+            <div id="battle-fever-fill" class="fever-fill" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="battle-stage" class="battle-stage glass-panel">
+        <div id="battle-arena"></div>
+
+        <div class="battle-footer-tools">
+          <button type="button" id="btn-use-hint" class="btn-glass" data-action="use-hint">
+            💡 일본어 스마트 힌트 (<span id="battle-hints-left">2</span>)
+          </button>
+          <button type="button" id="btn-battle-tts-speed" class="btn-glass btn-compact" data-action="toggle-tts-speed" title="청해/발음 속도 전환">
+            🔊 1.0x
+          </button>
+          <span class="glass-pill battle-shortcut-pill">
+            ⌨️ 1~4 보기 · 영문 로마자(sensei) 가나 조립 · H 힌트 · Space 확인
+          </span>
+        </div>
+
+        <!-- Hypercorrection 2.4s Imprint Overlay (Shown on Wrong Answer) -->
+        <div id="hypercorrection-overlay" class="hypercorrection-overlay" hidden>
+          <span id="hc-badge" class="hc-badge">⚡ 오답 즉시 각인 (오답노트 자동 등록)</span>
+          <div id="hc-emoji" class="hc-emoji">💡</div>
+          <div class="hc-word-row">
+            <span id="hc-word" class="hc-word">先生</span>
+            <button type="button" id="hc-speak-btn" class="card-mini-btn" data-action="speak-word" data-word-id="1" title="일본어 발음 다시 듣기">🔊</button>
+          </div>
+          <div id="hc-phonetic" class="vocab-phonetic">せんせい · [센세-] · sensei</div>
+          <div id="hc-meaning" class="hc-meaning">선생님</div>
+          <div id="hc-tip" class="hc-tip">💡 한자음 비교 및 장음·촉음 포인트가 표시됩니다.</div>
+          <button type="button" id="btn-skip-feedback" class="btn-prism" data-action="skip-feedback">
+            외웠어요! 다음 문제로 (Space / 클릭)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         SCREEN 4: RESULT & 10-WORD FURIGANA REVIEW
+         ================================================================== -->
+    <section id="screen-result" class="screen-view" data-screen="result" hidden>
+      <div class="result-hero glass-panel">
+        <div id="result-rank-orb" class="result-rank-orb anim-pop">S</div>
+        <div id="result-stars" class="result-stars">★★★</div>
+        <h2 id="result-title" class="hero-title">ROUND 1 클리어!</h2>
+        <p id="result-subtitle" class="hero-desc">환상적인 사쿠라 프리즘 집중력이에요!</p>
+
+        <div class="result-score-grid">
+          <div class="kpi-box">
+            <span id="res-score" class="kpi-val">0</span>
+            <span class="kpi-label">최종 획득 점수</span>
+          </div>
+          <div class="kpi-box">
+            <span id="res-accuracy" class="kpi-val">100%</span>
+            <span class="kpi-label">배틀 정답률</span>
+          </div>
+          <div class="kpi-box">
+            <span id="res-max-combo" class="kpi-val">0</span>
+            <span class="kpi-label">최대 콤보</span>
+          </div>
+          <div class="kpi-box">
+            <span id="res-early-bonus" class="kpi-val">+0</span>
+            <span class="kpi-label">조기·바운티 보너스</span>
+          </div>
+        </div>
+
+        <div id="result-badges-row" class="result-badges-row" hidden></div>
+
+        <div class="hero-cta-row result-cta-row">
+          <button type="button" id="btn-next-round" class="btn-prism" data-action="next-round">
+            🌸 다음 라운드 출격 →
+          </button>
+          <button type="button" id="btn-retry-round" class="btn-glass" data-action="retry-round">
+            ↺ 다시 도전하기
+          </button>
+          <button type="button" class="btn-glass" data-action="start-revenge">
+            🔥 약점 복수 도장
+          </button>
+          <button type="button" id="btn-back-to-lobby" class="btn-glass" data-action="back-to-lobby">
+            ⛩️ 월드맵 로비
+          </button>
+        </div>
+      </div>
+
+      <div class="review-list-panel glass-panel">
+        <div class="review-panel-head">
+          <h3>📋 이번 라운드 N5 어휘 정복 리포트</h3>
+          <span class="review-panel-sub">🔊 ja-JP 발음을 다시 듣고 헷갈리는 한자·장음은 ⭐별표로 찜해두세요</span>
+        </div>
+        <div id="result-review-grid" class="review-words-grid"></div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         SCREEN 5: 500-WORD JLPT N5 PRISM CODEX & MASTERY VAULT
+         ================================================================== -->
+    <section id="screen-codex" class="screen-view" data-screen="codex" hidden>
+      <div class="codex-header glass-panel">
+        <div class="codex-top-bar">
+          <div class="codex-title-group">
+            <button type="button" class="btn-glass" data-action="close-codex">← 돌아가기</button>
+            <h2 id="codex-main-title">📖 PRISM N5 500단어 프리즘 도감</h2>
+          </div>
+          <div class="codex-top-actions">
+            <button type="button" class="btn-glass" data-action="open-gojuon">
+              あ/ア 오십음도
+            </button>
+            <button type="button" id="btn-codex-tts-speed" class="btn-glass" data-action="toggle-tts-speed" title="ja-JP 발음 속도 전환">
+              🇯🇵 1.0x 표준 속도
+            </button>
+            <button type="button" class="btn-prism btn-gold" data-action="start-revenge">
+              🔥 오답·별표 복수 출격
+            </button>
+          </div>
+        </div>
+
+        <div class="codex-search-row">
+          <input
+            type="search"
+            id="codex-search-input"
+            class="glass-search-input"
+            placeholder="한자, 히라가나/가타카나, 로마자(sensei), 한국어 뜻 검색..."
+            aria-label="JLPT N5 단어 통합 검색"
+          />
+          <select id="codex-level-select" class="glass-select" aria-label="레벨 필터">
+            <option value="">전체 레벨 (500)</option>
+            <option value="1">Lv.1 N5 입문 기초 (R1~20)</option>
+            <option value="2">Lv.2 N5 핵심 활용 (R21~38)</option>
+            <option value="3">Lv.3 N5 실전 완성 (R39~50)</option>
+          </select>
+          <select id="codex-pos-select" class="glass-select" aria-label="품사 필터">
+            <option value="">전체 품사 (8종)</option>
+            <option value="명사">명사</option>
+            <option value="1류동사">1류동사 (5단)</option>
+            <option value="2류동사">2류동사 (1단)</option>
+            <option value="3류동사">3류동사 (불규칙)</option>
+            <option value="い형용사">い형용사</option>
+            <option value="な형용사">な형용사</option>
+            <option value="부사">부사</option>
+            <option value="표현">표현</option>
+          </select>
+        </div>
+
+        <div class="codex-filter-bar">
+          <div class="segmented-tabs" role="tablist" aria-label="암기 상태 필터">
+            <button type="button" class="seg-tab is-active" data-action="codex-filter" data-filter="all">전체 (<span id="cf-count-all">500</span>)</button>
+            <button type="button" class="seg-tab" data-action="codex-filter" data-filter="mastered">🌸 마스터 (<span id="cf-count-mastered">0</span>)</button>
+            <button type="button" class="seg-tab" data-action="codex-filter" data-filter="learning">🌱 학습중 (<span id="cf-count-learning">0</span>)</button>
+            <button type="button" class="seg-tab" data-action="codex-filter" data-filter="unseen">📘 미학습 (<span id="cf-count-unseen">500</span>)</button>
+            <button type="button" class="seg-tab" data-action="codex-filter" data-filter="pinned">⭐ 별표 (<span id="cf-count-pinned">0</span>)</button>
+            <button type="button" class="seg-tab" data-action="codex-filter" data-filter="wrong">🔥 오답노트 (<span id="cf-count-wrong">0</span>)</button>
+          </div>
+          <span id="codex-result-count" class="codex-count-label">검색 결과 500개</span>
+        </div>
+      </div>
+
+      <div id="codex-grid" class="codex-grid"></div>
+      <div class="codex-more-wrap">
+        <button type="button" id="btn-codex-more" class="btn-glass" data-action="codex-load-more" hidden>
+          더 많은 단어 불러오기 ↓
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ====================================================================
+       MODAL 1: INTERACTIVE GOJUON (五十音図) GLASS CHEATSHEET
+       ==================================================================== -->
+  <div id="gojuon-modal" class="modal-backdrop" data-modal="gojuon" role="dialog" aria-modal="true" aria-labelledby="gojuon-modal-title" hidden>
+    <div class="modal-dialog modal-dialog--wide glass-panel">
+      <div class="modal-head">
+        <div>
+          <h2 id="gojuon-modal-title" class="modal-title">🌸 오십음도 (五十音図) 크리스탈 치트시트</h2>
+          <p class="modal-subtitle">글자를 클릭/터치하면 일본어(ja-JP) 원어민 발음이 즉시 재생됩니다.</p>
+        </div>
+        <button type="button" class="btn-glass btn-icon" data-action="close-gojuon" aria-label="오십음도 닫기">✕</button>
+      </div>
+
+      <div class="gojuon-toolbar">
+        <div class="segmented-tabs" role="tablist" aria-label="오십음도 분류 탭">
+          <button type="button" class="seg-tab is-active" data-action="gojuon-tab" data-tab="seion">청음 (기본 46자)</button>
+          <button type="button" class="seg-tab" data-action="gojuon-tab" data-tab="dakuon">탁음 · 반탁음 (゛/゜)</button>
+          <button type="button" class="seg-tab" data-action="gojuon-tab" data-tab="yoon">요음 (きゃ·しゃ·ちゃ)</button>
+          <button type="button" class="seg-tab" data-action="gojuon-tab" data-tab="rules">N5 발음 법칙 (っ·ー·ん)</button>
+        </div>
+
+        <div class="segmented-tabs" role="group" aria-label="문자 표기 전환">
+          <button type="button" class="seg-tab is-active" data-action="gojuon-script" data-script="both">あ+ア 병기</button>
+          <button type="button" class="seg-tab" data-action="gojuon-script" data-script="hira">あ 히라가나</button>
+          <button type="button" class="seg-tab" data-action="gojuon-script" data-script="kata">ア 가타카나</button>
+        </div>
+      </div>
+
+      <div id="gojuon-body" class="gojuon-body"></div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       MODAL 2: ACHIEVEMENTS & PROGRESS SETTINGS
+       ==================================================================== -->
+  <div id="badges-modal" class="modal-backdrop" data-modal="badges" role="dialog" aria-modal="true" aria-labelledby="badges-modal-title" hidden>
+    <div class="modal-dialog glass-panel">
+      <div class="modal-head">
+        <h2 id="badges-modal-title" class="modal-title">🏅 나의 JLPT N5 업적 &amp; 데이터 관리</h2>
+        <button type="button" class="btn-glass btn-icon" data-action="close-badges" aria-label="업적 모달 닫기">✕</button>
+      </div>
+      <div id="badges-grid" class="achievements-grid"></div>
+      <div class="modal-foot">
+        <span class="modal-foot-note">모든 라이트너 숙련도와 클리어 기록은 브라우저에 자동 저장됩니다.</span>
+        <button type="button" class="btn-glass btn-danger-text" data-action="reset-progress">
+          🗑️ 학습 기록 초기화
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Stack -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- ====================================================================
+       Classic Global Script Pipeline (100% file:// & GitHub Pages Compatible)
+       ==================================================================== -->
+  <!-- 1. JLPT N5 500 Data Layer (@n5-curator) -->
+  <script src="src/data/words-part1.js"></script>
+  <script src="src/data/words-part2.js"></script>
+  <script src="src/data/words-index.js"></script>
+
+  <!-- 2. Japanese Cognitive Learning, Romaji, Gojuon & Unified Audio (@n5-pedagogue) -->
+  <script src="src/js/learning-system.js"></script>
+
+  <!-- 3. Core Game State Machine, 3-Wave N5 Generator & Live Romaji Bridge (@n5-architect) -->
+  <script src="src/js/game-engine.js"></script>
+
+  <!-- 4. Sakura Glassmorphism Frontend, Furigana & Event Binding (@n5-ui-artist) -->
+  <script src="src/js/app-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,2388 @@
+/* ==========================================================================
+   PRISM NIHONGO N5 — Sakura Aurora & Kyoto Crystal Neo-Glassmorphism System
+   Exclusive Owner: @n5-ui-artist
+   Supports: Midnight Sakura (Dark) & Crystal Sakura Day (Light) + Sakura Fever
+   WCAG AAA Contrast (>= 7.0:1) + @supports not (backdrop-filter) Fallback
+   ========================================================================== */
+
+:root,
+[data-theme="midnight-sakura"],
+[data-theme="dark-sakura"],
+[data-theme="dark-aurora"],
+[data-theme="dark"] {
+  /* Midnight Sakura Deep Indigo Canvas */
+  --bg-canvas: #070918;
+  --bg-gradient: radial-gradient(ellipse at 18% 0%, #19153c 0%, #090d22 58%, #050712 100%);
+
+  /* Living Sakura & Kyoto Aurora Orbs */
+  --orb-1: #ff7eb3;
+  --orb-2: #38bdf8;
+  --orb-3: #a78bfa;
+  --orb-4: #fb7185;
+  --orb-opacity: 0.40;
+
+  /* 3-Tier Frosted Glass Surfaces (WCAG AAA High Contrast) */
+  --glass-bg-1: rgba(13, 17, 40, 0.82);
+  --glass-bg-2: rgba(20, 26, 58, 0.76);
+  --glass-bg-3: rgba(28, 36, 78, 0.88);
+  --glass-hover: rgba(38, 49, 102, 0.90);
+  --glass-active: rgba(50, 64, 128, 0.94);
+  --glass-input: rgba(8, 12, 28, 0.78);
+
+  /* Specular Borders & Highlights */
+  --glass-border: rgba(255, 210, 232, 0.17);
+  --glass-border-strong: rgba(255, 182, 218, 0.36);
+  --glass-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.24), inset 0 0 24px rgba(255, 145, 196, 0.05);
+  --glass-shadow: 0 18px 44px -10px rgba(0, 0, 0, 0.65), 0 4px 14px rgba(0, 0, 0, 0.40);
+  --glass-shadow-sm: 0 8px 22px -6px rgba(0, 0, 0, 0.50);
+
+  /* WCAG AAA Typography (Contrast > 14:1) */
+  --text-primary: #fdf4f8;
+  --text-secondary: #e2e8f5;
+  --text-muted: #b4c0dc;
+  --text-inverse: #070918;
+
+  /* Sakura Prism Semantic Accents */
+  --accent-sakura: #ff85b3;
+  --accent-sakura-glow: rgba(255, 133, 179, 0.34);
+  --accent-cyan: #38bdf8;
+  --accent-cyan-glow: rgba(56, 189, 248, 0.32);
+  --accent-violet: #c084fc;
+  --accent-violet-glow: rgba(192, 132, 252, 0.32);
+  --accent-gold: #fbbf24;
+  --accent-gold-glow: rgba(251, 191, 36, 0.36);
+  --accent-emerald: #34d399;
+  --accent-emerald-glow: rgba(52, 211, 153, 0.34);
+  --accent-danger: #fb7185;
+  --accent-danger-glow: rgba(251, 113, 133, 0.38);
+
+  /* Blur & Radius */
+  --blur-lg: blur(22px) saturate(180%);
+  --blur-md: blur(14px) saturate(165%);
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --radius-pill: 9999px;
+
+  /* Offline-Resilient CJK (Japanese + Korean) Sans & Mono Stack */
+  --font-sans: 'Pretendard Variable', 'Pretendard', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
+    'Yu Gothic UI', 'Yu Gothic', 'Meiryo', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Segoe UI', sans-serif;
+  --font-jp: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo',
+    'Noto Sans JP', 'Pretendard Variable', 'Malgun Gothic', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+}
+
+/* Crystal Sakura Day (Light Mode) — Crisp Ivory & Kyoto Ice Readability */
+[data-theme="crystal-sakura-day"],
+[data-theme="crystal-day"],
+[data-theme="light"] {
+  --bg-canvas: #f7f4fb;
+  --bg-gradient: radial-gradient(ellipse at 20% 0%, #ffe4ef 0%, #f3f5ff 56%, #eef8ff 100%);
+
+  --orb-1: #f472b6;
+  --orb-2: #38bdf8;
+  --orb-3: #818cf8;
+  --orb-4: #fb7185;
+  --orb-opacity: 0.30;
+
+  --glass-bg-1: rgba(255, 255, 255, 0.88);
+  --glass-bg-2: rgba(255, 255, 255, 0.82);
+  --glass-bg-3: rgba(255, 255, 255, 0.95);
+  --glass-hover: rgba(255, 250, 253, 0.98);
+  --glass-active: rgba(252, 238, 246, 0.99);
+  --glass-input: rgba(244, 242, 252, 0.92);
+
+  --glass-border: rgba(190, 24, 93, 0.16);
+  --glass-border-strong: rgba(190, 24, 93, 0.34);
+  --glass-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.96), inset 0 0 22px rgba(255, 255, 255, 0.65);
+  --glass-shadow: 0 16px 38px -10px rgba(88, 28, 135, 0.13), 0 4px 12px rgba(88, 28, 135, 0.06);
+  --glass-shadow-sm: 0 8px 20px -6px rgba(88, 28, 135, 0.10);
+
+  /* WCAG AAA Light Typography (Contrast > 14:1) */
+  --text-primary: #11162a;
+  --text-secondary: #26304f;
+  --text-muted: #455073;
+  --text-inverse: #ffffff;
+
+  --accent-sakura: #be185d;
+  --accent-sakura-glow: rgba(190, 24, 93, 0.18);
+  --accent-cyan: #0369a1;
+  --accent-cyan-glow: rgba(3, 105, 161, 0.18);
+  --accent-violet: #6d28d9;
+  --accent-violet-glow: rgba(109, 40, 217, 0.18);
+  --accent-gold: #b45309;
+  --accent-gold-glow: rgba(180, 83, 9, 0.22);
+  --accent-emerald: #047857;
+  --accent-emerald-glow: rgba(4, 120, 87, 0.20);
+  --accent-danger: #be123c;
+  --accent-danger-glow: rgba(190, 18, 60, 0.22);
+}
+
+/* High-Opacity Solid Glass Fallback when backdrop-filter is unsupported */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root,
+  [data-theme="midnight-sakura"],
+  [data-theme="dark-sakura"],
+  [data-theme="dark-aurora"],
+  [data-theme="dark"] {
+    --glass-bg-1: rgba(14, 19, 44, 0.97);
+    --glass-bg-2: rgba(21, 28, 62, 0.95);
+    --glass-bg-3: rgba(29, 38, 82, 0.99);
+  }
+  [data-theme="crystal-sakura-day"],
+  [data-theme="crystal-day"],
+  [data-theme="light"] {
+    --glass-bg-1: rgba(255, 255, 255, 0.98);
+    --glass-bg-2: rgba(251, 249, 255, 0.96);
+    --glass-bg-3: rgba(255, 255, 255, 1);
+  }
+}
+
+/* Sakura Fever Overdrive Modulation */
+body.is-fever {
+  --orb-1: #ff4d94;
+  --orb-2: #fbbf24;
+  --orb-3: #c084fc;
+  --orb-4: #38bdf8;
+  --orb-opacity: 0.56;
+}
+
+/* ==========================================================================
+   Reset & Base
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-canvas);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.50;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-sakura);
+  outline-offset: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Japanese <ruby><rt> Furigana Precision Typography
+   ========================================================================== */
+ruby {
+  ruby-align: center;
+  ruby-position: over;
+}
+
+ruby rt {
+  font-family: var(--font-jp);
+  font-size: 0.50em;
+  font-weight: 700;
+  color: var(--accent-sakura);
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  padding: 0 1px;
+  transition: filter 0.18s ease, opacity 0.18s ease;
+}
+
+.jp-text {
+  font-family: var(--font-jp);
+}
+
+/* ==========================================================================
+   Background Sakura Aurora Mesh & FX Canvas
+   ========================================================================== */
+.aurora-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(88px);
+  opacity: var(--orb-opacity);
+  will-change: transform;
+}
+
+.aurora-orb--1 {
+  width: min(56vw, 520px);
+  height: min(56vw, 520px);
+  top: -12%;
+  left: -8%;
+  background: var(--orb-1);
+}
+
+.aurora-orb--2 {
+  width: min(52vw, 480px);
+  height: min(52vw, 480px);
+  top: 18%;
+  right: -10%;
+  background: var(--orb-2);
+}
+
+.aurora-orb--3 {
+  width: min(50vw, 460px);
+  height: min(50vw, 460px);
+  bottom: -14%;
+  left: 16%;
+  background: var(--orb-3);
+}
+
+.aurora-orb--4 {
+  width: min(40vw, 380px);
+  height: min(40vw, 380px);
+  bottom: 10%;
+  right: 18%;
+  background: var(--orb-4);
+}
+
+.aurora-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 205, 228, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 205, 228, 0.028) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.65) 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.65) 20%, transparent 80%);
+}
+
+[data-theme="crystal-sakura-day"] .aurora-grid-overlay,
+[data-theme="crystal-day"] .aurora-grid-overlay,
+[data-theme="light"] .aurora-grid-overlay {
+  background-image:
+    linear-gradient(rgba(190, 24, 93, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(190, 24, 93, 0.045) 1px, transparent 1px);
+}
+
+#fx-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Core Glass Primitives & Buttons
+   ========================================================================== */
+.glass-panel {
+  background: var(--glass-bg-1);
+  backdrop-filter: var(--blur-lg);
+  -webkit-backdrop-filter: var(--blur-lg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+  border-radius: var(--radius-xl);
+}
+
+.glass-card {
+  background: var(--glass-bg-2);
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-highlight), var(--glass-shadow-sm);
+  border-radius: var(--radius-lg);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.glass-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--glass-bg-2);
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+  border: 1px solid var(--glass-border);
+  font-size: 0.83rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  background: var(--glass-bg-2);
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-highlight), var(--glass-shadow-sm);
+  font-weight: 700;
+  font-size: 0.92rem;
+  transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.btn-glass:hover:not(:disabled) {
+  background: var(--glass-hover);
+  border-color: var(--glass-border-strong);
+  transform: translateY(-1px);
+}
+
+.btn-glass:active:not(:disabled) {
+  transform: translateY(1px) scale(0.985);
+}
+
+.btn-compact {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+.btn-xs {
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-danger-text {
+  color: var(--accent-danger);
+}
+
+.btn-prism {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 52%, #06b6d4 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48), 0 10px 26px -4px rgba(236, 72, 153, 0.52);
+  font-weight: 800;
+  font-size: 0.98rem;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.btn-prism:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58), 0 14px 32px -4px rgba(236, 72, 153, 0.65);
+}
+
+.btn-prism:active:not(:disabled) {
+  transform: translateY(1px) scale(0.985);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #f59e0b 0%, #f43f5e 55%, #ec4899 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 10px 26px -4px rgba(244, 63, 94, 0.50);
+}
+
+.btn-emerald {
+  background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 10px 26px -4px rgba(16, 185, 129, 0.48);
+}
+
+.btn-icon {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   App Shell & Top Navigation Header
+   ========================================================================== */
+.app-shell {
+  position: relative;
+  z-index: 1;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 12px 16px 36px;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.top-nav {
+  position: sticky;
+  top: 10px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: var(--radius-lg);
+}
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  min-width: 0;
+}
+
+.brand-gem {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #ff7eb3 0%, #a855f7 52%, #38bdf8 100%);
+  color: #ffffff;
+  font-family: var(--font-jp);
+  font-weight: 900;
+  font-size: 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(236, 72, 153, 0.45);
+  flex-shrink: 0;
+}
+
+.brand-title {
+  display: block;
+  font-size: 1.04rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.brand-sub {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.nav-stats {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Screen Container Switching
+   ========================================================================== */
+.screen-view {
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1;
+}
+
+.screen-view.is-active {
+  display: flex;
+}
+
+/* ==========================================================================
+   SCREEN 1: LOBBY (Hero + 3 Modes + 50-Round N5 World Map)
+   ========================================================================== */
+.lobby-hero {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 20px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-sakura-glow);
+  border: 1px solid var(--accent-sakura);
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.hero-title {
+  font-size: clamp(1.42rem, 3.1vw, 2.1rem);
+  font-weight: 900;
+  line-height: 1.24;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.hero-desc {
+  color: var(--text-secondary);
+  font-size: 0.94rem;
+  margin-bottom: 18px;
+}
+
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.hero-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg-3);
+  border: 1px solid var(--glass-border);
+}
+
+.mastery-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.mastery-track {
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background: var(--glass-input);
+  overflow: hidden;
+  display: flex;
+  border: 1px solid var(--glass-border);
+}
+
+.mastery-fill-mastered {
+  background: linear-gradient(90deg, #ec4899, #fb7185, #38bdf8);
+  height: 100%;
+  transition: width 0.45s ease;
+}
+
+.mastery-fill-learning {
+  background: linear-gradient(90deg, #8b5cf6, #c084fc);
+  height: 100%;
+  transition: width 0.45s ease;
+}
+
+.hero-mini-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.kpi-box {
+  padding: 10px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--glass-bg-2);
+  border: 1px solid var(--glass-border);
+  text-align: center;
+}
+
+.kpi-val {
+  display: block;
+  font-size: 1.14rem;
+  font-weight: 900;
+  color: var(--accent-sakura);
+}
+
+.kpi-label {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* 3 Mode Cards */
+.mode-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.mode-card {
+  padding: 18px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mode-card:hover:not(:disabled) {
+  transform: translateY(-3px);
+  border-color: var(--glass-border-strong);
+  background: var(--glass-hover);
+}
+
+.mode-card.is-selected {
+  border-color: var(--accent-sakura);
+  box-shadow: 0 0 0 2px var(--accent-sakura-glow), var(--glass-shadow-sm);
+}
+
+.mode-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.mode-card__icon {
+  font-size: 1.65rem;
+}
+
+.mode-card__badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  background: var(--glass-bg-3);
+  border: 1px solid var(--glass-border);
+  color: var(--accent-sakura);
+}
+
+.mode-card__title {
+  font-size: 1.04rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.mode-card__desc {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+}
+
+/* 50-Round World Map Panel */
+.worldmap-panel {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.worldmap-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.segmented-tabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 5px;
+  border-radius: var(--radius-md);
+  background: var(--glass-input);
+  border: 1px solid var(--glass-border);
+  max-width: 100%;
+}
+
+.seg-tab {
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: transform 0.14s ease, border-color 0.14s ease;
+}
+
+.seg-tab:hover {
+  color: var(--text-primary);
+}
+
+.seg-tab.is-active {
+  background: var(--glass-bg-3);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-sm);
+}
+
+.lobby-options-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+}
+
+.option-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.glass-select {
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--glass-bg-3);
+  border: 1px solid var(--glass-border);
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  max-width: 100%;
+}
+
+.rounds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  gap: 12px;
+}
+
+.round-tile {
+  padding: 14px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.round-tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-sakura);
+  background: var(--glass-hover);
+}
+
+.round-tile[data-level="1"] {
+  border-left: 3px solid var(--accent-sakura);
+}
+.round-tile[data-level="2"] {
+  border-left: 3px solid var(--accent-cyan);
+}
+.round-tile[data-level="3"] {
+  border-left: 3px solid var(--accent-violet);
+}
+
+.round-tile__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.round-tile__num {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  font-size: 0.73rem;
+  font-weight: 900;
+  background: var(--glass-bg-3);
+  border: 1px solid var(--glass-border);
+}
+
+.rank-badge--Splus,
+.rank-badge--S {
+  background: linear-gradient(135deg, #f59e0b, #ec4899);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.rank-badge--A {
+  background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+  color: #ffffff;
+}
+
+.rank-badge--B,
+.rank-badge--C {
+  color: var(--accent-emerald);
+  border-color: var(--accent-emerald);
+}
+
+.round-tile__title {
+  font-size: 0.93rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.32;
+}
+
+.round-tile__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: auto;
+}
+
+.round-stars {
+  color: var(--accent-gold);
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   SCREEN 2: STUDY PHASE ("10-Word Sakura Prism Memory Workshop")
+   ========================================================================== */
+.study-header {
+  padding: 18px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.study-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.study-round-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--accent-sakura);
+}
+
+.study-title {
+  font-size: clamp(1.16rem, 2.4vw, 1.5rem);
+  font-weight: 900;
+}
+
+.study-timer-cluster {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.early-bonus-sub {
+  font-weight: 700;
+  opacity: 0.94;
+}
+
+.ring-timer {
+  position: relative;
+  width: 66px;
+  height: 66px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ring-timer svg {
+  width: 66px;
+  height: 66px;
+  transform: rotate(-90deg);
+}
+
+.ring-timer__bg {
+  fill: none;
+  stroke: var(--glass-border);
+  stroke-width: 5;
+}
+
+.ring-timer__progress {
+  fill: none;
+  stroke: var(--accent-sakura);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 188.5;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.35s linear, stroke 0.3s ease;
+}
+
+.ring-timer.is-urgent .ring-timer__progress {
+  stroke: var(--accent-danger);
+}
+
+.ring-timer__text {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 1.02rem;
+  font-weight: 900;
+}
+
+.study-toolbar {
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.study-toolbar__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pin-bounty-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-gold-glow);
+  border: 1px solid var(--accent-gold);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+/* 10-Word 3D Flip Card Grid — Sized with <ruby><rt> Headroom (Zero Overflow!) */
+.study-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  gap: 14px;
+}
+
+.study-cards-grid.is-focus-mode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.study-cards-grid.is-focus-mode .vocab-flip-scene {
+  width: 100%;
+  max-width: 500px;
+  min-height: 316px;
+}
+
+.focus-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.vocab-flip-scene {
+  perspective: 1100px;
+  min-height: 306px;
+  position: relative;
+}
+
+.vocab-card-3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 306px;
+  transform-style: preserve-3d;
+  transition: transform 0.50s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.vocab-flip-scene.is-flipped .vocab-card-3d {
+  transform: rotateY(180deg);
+}
+
+.vocab-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg-2);
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-highlight), var(--glass-shadow-sm);
+  padding: 13px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.vocab-face:hover {
+  border-color: var(--glass-border-strong);
+}
+
+.vocab-flip-scene.is-pinned .vocab-face {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 1px var(--accent-gold), 0 10px 26px -6px var(--accent-gold-glow);
+}
+
+.vocab-face--back {
+  transform: rotateY(180deg);
+  background: var(--glass-bg-3);
+  gap: 6px;
+}
+
+.vocab-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.pos-tag {
+  font-size: 0.71rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-violet-glow);
+  border: 1px solid var(--accent-violet);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.vocab-card__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-mini-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--glass-bg-3);
+  border: 1px solid var(--glass-border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.88rem;
+  flex-shrink: 0;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.card-mini-btn:hover {
+  transform: scale(1.08);
+  border-color: var(--accent-sakura);
+}
+
+.card-mini-btn.is-pinned {
+  background: var(--accent-gold-glow);
+  border-color: var(--accent-gold);
+}
+
+.vocab-card__center {
+  text-align: center;
+  margin: auto 0;
+  padding: 4px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.vocab-emoji {
+  font-size: 1.7rem;
+  line-height: 1.1;
+  display: block;
+}
+
+.vocab-jp-expr {
+  font-family: var(--font-jp);
+  font-size: 1.62rem;
+  font-weight: 900;
+  line-height: 1.95;
+  color: var(--text-primary);
+  word-break: keep-all;
+  transition: filter 0.2s ease, opacity 0.2s ease;
+}
+
+.vocab-reading-sub {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  line-height: 1.3;
+  transition: filter 0.2s ease, opacity 0.2s ease;
+}
+
+.vocab-phonetic {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.vocab-meaning {
+  font-size: 1.04rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  margin-top: 2px;
+  line-height: 1.3;
+  transition: filter 0.2s ease, opacity 0.2s ease;
+}
+
+/* ==========================================================================
+   4-Stage Active Recall Frost Masking (all | furigana | meaning | japanese)
+   Hovering or tapping (.is-peeking) smoothly melts the frost!
+   ========================================================================== */
+/* 1. Furigana Mask: blurs <ruby><rt> AND reading-sub while keeping Kanji & Okurigana sharp */
+.study-cards-grid[data-mask="furigana"] .vocab-jp-expr rt,
+.study-cards-grid[data-mask="furigana"] .vocab-reading-sub {
+  filter: blur(6px);
+  opacity: 0.14;
+}
+
+.study-cards-grid[data-mask="furigana"] .vocab-face:hover .vocab-jp-expr rt,
+.study-cards-grid[data-mask="furigana"] .vocab-face:hover .vocab-reading-sub,
+.study-cards-grid[data-mask="furigana"] .vocab-face.is-peeking .vocab-jp-expr rt,
+.study-cards-grid[data-mask="furigana"] .vocab-face.is-peeking .vocab-reading-sub {
+  filter: blur(0);
+  opacity: 1;
+}
+
+/* 2. Meaning Mask: blurs Korean meaning */
+.study-cards-grid[data-mask="meaning"] .vocab-meaning {
+  filter: blur(7px);
+  opacity: 0.18;
+  background: var(--glass-input);
+  border-radius: 6px;
+  padding: 1px 8px;
+}
+
+.study-cards-grid[data-mask="meaning"] .vocab-face:hover .vocab-meaning,
+.study-cards-grid[data-mask="meaning"] .vocab-face.is-peeking .vocab-meaning {
+  filter: blur(0);
+  opacity: 1;
+}
+
+/* 3. Japanese Mask (supports both "japanese" & "expression"): blurs Japanese expression & reading */
+.study-cards-grid[data-mask="japanese"] .vocab-jp-expr,
+.study-cards-grid[data-mask="japanese"] .vocab-reading-sub,
+.study-cards-grid[data-mask="expression"] .vocab-jp-expr,
+.study-cards-grid[data-mask="expression"] .vocab-reading-sub {
+  filter: blur(8px);
+  opacity: 0.16;
+}
+
+.study-cards-grid[data-mask="japanese"] .vocab-face:hover .vocab-jp-expr,
+.study-cards-grid[data-mask="japanese"] .vocab-face:hover .vocab-reading-sub,
+.study-cards-grid[data-mask="japanese"] .vocab-face.is-peeking .vocab-jp-expr,
+.study-cards-grid[data-mask="japanese"] .vocab-face.is-peeking .vocab-reading-sub,
+.study-cards-grid[data-mask="expression"] .vocab-face:hover .vocab-jp-expr,
+.study-cards-grid[data-mask="expression"] .vocab-face:hover .vocab-reading-sub,
+.study-cards-grid[data-mask="expression"] .vocab-face.is-peeking .vocab-jp-expr,
+.study-cards-grid[data-mask="expression"] .vocab-face.is-peeking .vocab-reading-sub {
+  filter: blur(0);
+  opacity: 1;
+}
+
+.vocab-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.vocab-tip-box {
+  padding: 7px 9px;
+  border-radius: var(--radius-sm);
+  background: var(--glass-bg-2);
+  border-left: 3px solid var(--accent-sakura);
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  line-height: 1.36;
+}
+
+.vocab-example-box {
+  font-size: 0.77rem;
+  color: var(--text-secondary);
+  line-height: 1.36;
+}
+
+.vocab-example-jp {
+  font-family: var(--font-jp);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+/* ==========================================================================
+   SCREEN 3: BATTLE ARENA (Wave 1 Quiz / Wave 2 Pair Matrix / Wave 3 Kana Shards)
+   ========================================================================== */
+.battle-hud {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.battle-hud__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.battle-hud__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.wave-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 13px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--accent-sakura-glow), var(--accent-violet-glow));
+  border: 1px solid var(--accent-sakura);
+  font-size: 0.81rem;
+  font-weight: 900;
+}
+
+.wave-pill.is-boss {
+  background: linear-gradient(90deg, rgba(244, 63, 94, 0.36), rgba(245, 158, 11, 0.36));
+  border-color: var(--accent-gold);
+}
+
+.hud-metrics {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.score-display {
+  font-family: var(--font-mono);
+  font-size: 1.24rem;
+  font-weight: 900;
+  color: var(--accent-gold);
+}
+
+.combo-pill {
+  padding: 4px 11px;
+  border-radius: var(--radius-pill);
+  background: var(--glass-bg-3);
+  border: 1px solid var(--glass-border-strong);
+  font-weight: 900;
+  font-size: 0.83rem;
+  color: var(--accent-sakura);
+}
+
+.combo-pill.is-fever {
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.shield-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.hud-bars {
+  display: grid;
+  grid-template-columns: 1fr 140px;
+  gap: 12px;
+  align-items: center;
+}
+
+.q-timer-track,
+.fever-track {
+  height: 9px;
+  border-radius: var(--radius-pill);
+  background: var(--glass-input);
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+  position: relative;
+}
+
+.q-timer-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent-emerald), var(--accent-cyan));
+  border-radius: var(--radius-pill);
+  transition: width 0.1s linear;
+}
+
+.q-timer-fill.is-urgent {
+  background: linear-gradient(90deg, #f59e0b, #fb7185);
+}
+
+.fever-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ec4899, #a855f7, #fbbf24);
+  border-radius: var(--radius-pill);
+  transition: width 0.28s ease;
+}
+
+.battle-stage {
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  min-height: 400px;
+}
+
+.question-header-tags {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bounty-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-gold-glow);
+  border: 1px solid var(--accent-gold);
+  font-size: 0.77rem;
+  font-weight: 800;
+}
+
+.revenge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-danger-glow);
+  border: 1px solid var(--accent-danger);
+  font-size: 0.77rem;
+  font-weight: 800;
+}
+
+.kanji-hint-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-sakura-glow);
+  border: 1px solid var(--accent-sakura);
+  font-family: var(--font-jp);
+  font-size: 1.02rem;
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+.question-prompt-box {
+  text-align: center;
+  padding: 18px 14px;
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg-3);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.q-prompt-label {
+  font-size: 0.79rem;
+  font-weight: 800;
+  color: var(--accent-sakura);
+  letter-spacing: 0.02em;
+}
+
+.q-prompt-main {
+  font-family: var(--font-jp);
+  font-size: clamp(1.5rem, 3.8vw, 2.35rem);
+  font-weight: 900;
+  line-height: 1.85;
+  word-break: keep-all;
+}
+
+.q-prompt-main--kanji {
+  font-size: clamp(1.85rem, 4.6vw, 2.75rem);
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+}
+
+.q-prompt-sub {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+.q-hint-banner {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-violet-glow);
+  border: 1px solid var(--accent-violet);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Wave 1: Multiple Choice 2x2 Options Grid */
+.mc-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.mc-option-btn {
+  padding: 15px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg-2);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-highlight), var(--glass-shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  font-family: var(--font-jp);
+  font-size: 1.06rem;
+  font-weight: 800;
+  line-height: 1.75;
+  min-height: 64px;
+  transition: transform 0.14s ease, border-color 0.14s ease;
+}
+
+.mc-option-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--glass-hover);
+  border-color: var(--accent-sakura);
+}
+
+.mc-keycap {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--glass-bg-3);
+  border: 1px solid var(--glass-border-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 900;
+  color: var(--accent-sakura);
+  flex-shrink: 0;
+}
+
+.mc-option-btn.is-eliminated {
+  opacity: 0.24;
+  pointer-events: none;
+  text-decoration: line-through;
+}
+
+.mc-option-btn.is-correct {
+  background: var(--accent-emerald-glow);
+  border-color: var(--accent-emerald);
+  box-shadow: 0 0 20px var(--accent-emerald-glow);
+}
+
+.mc-option-btn.is-wrong {
+  background: var(--accent-danger-glow);
+  border-color: var(--accent-danger);
+}
+
+/* Wave 2: Pair Match 2-Column Sakura Matrix */
+.pair-matrix {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+}
+
+.pair-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pair-tile {
+  padding: 11px 12px;
+  min-height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--glass-bg-2);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-highlight);
+  font-family: var(--font-jp);
+  font-size: 0.98rem;
+  font-weight: 800;
+  line-height: 1.75;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-break: keep-all;
+  transition: transform 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.pair-tile:hover:not(:disabled) {
+  border-color: var(--accent-sakura);
+  background: var(--glass-hover);
+}
+
+.pair-tile.is-selected {
+  border-color: var(--accent-sakura);
+  background: var(--accent-sakura-glow);
+  box-shadow: 0 0 0 2px var(--accent-sakura);
+  transform: scale(1.02);
+}
+
+.pair-tile.is-matched {
+  background: var(--accent-emerald-glow);
+  border-color: var(--accent-emerald);
+  opacity: 0.40;
+  pointer-events: none;
+}
+
+.pair-tile.is-mismatch {
+  background: var(--accent-danger-glow);
+  border-color: var(--accent-danger);
+}
+
+.pair-tile.is-hinted {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 2px var(--accent-gold-glow), 0 0 18px var(--accent-gold-glow);
+}
+
+/* Wave 3: Kana Crystal Shards + Live Romaji Typing Bridge */
+.spelling-arena {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.spelling-slots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.kana-slot,
+.letter-slot {
+  min-width: 48px;
+  height: 52px;
+  padding: 0 8px;
+  border-radius: var(--radius-sm);
+  background: var(--glass-input);
+  border: 2px solid var(--glass-border-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-jp);
+  font-size: 1.32rem;
+  font-weight: 900;
+  color: var(--accent-sakura);
+  transition: transform 0.14s ease, border-color 0.14s ease;
+}
+
+.kana-slot.is-filled,
+.letter-slot.is-filled {
+  background: var(--glass-bg-3);
+  border-color: var(--accent-sakura);
+  color: var(--text-primary);
+}
+
+.kana-slot.is-correct,
+.letter-slot.is-correct {
+  border-color: var(--accent-emerald);
+  background: var(--accent-emerald-glow);
+}
+
+.kana-slot.is-wrong,
+.letter-slot.is-wrong {
+  border-color: var(--accent-danger);
+  background: var(--accent-danger-glow);
+}
+
+/* Live Romaji Typing Indicator Capsule */
+.romaji-buffer-capsule {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--glass-input);
+  border: 1px solid var(--glass-border);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  max-width: 100%;
+  text-align: center;
+}
+
+.romaji-buffer-capsule.is-typing {
+  border-color: var(--accent-cyan);
+  background: var(--accent-cyan-glow);
+  color: var(--text-primary);
+  box-shadow: 0 0 16px var(--accent-cyan-glow);
+}
+
+.romaji-buffer-code {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: var(--accent-sakura);
+  padding: 1px 7px;
+  border-radius: 6px;
+  background: var(--glass-bg-3);
+}
+
+.shard-pool {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 600px;
+}
+
+.kana-shard,
+.letter-shard {
+  min-width: 50px;
+  height: 50px;
+  padding: 0 10px;
+  border-radius: var(--radius-sm);
+  background: var(--glass-bg-3);
+  border: 1px solid var(--glass-border-strong);
+  box-shadow: var(--glass-highlight), var(--glass-shadow-sm);
+  font-family: var(--font-jp);
+  font-size: 1.22rem;
+  font-weight: 900;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.1;
+  transition: transform 0.14s ease, opacity 0.14s ease, border-color 0.14s ease;
+}
+
+.kana-shard small {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.kana-shard:hover:not(:disabled),
+.letter-shard:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--accent-sakura);
+}
+
+.kana-shard.is-used,
+.letter-shard.is-used {
+  opacity: 0.24;
+  transform: scale(0.92);
+  pointer-events: none;
+}
+
+.spelling-controls,
+.battle-footer-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.battle-shortcut-pill {
+  color: var(--text-muted);
+  font-size: 0.77rem;
+}
+
+/* Listening Audio Wave Button */
+.audio-wave-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, var(--accent-sakura-glow), var(--accent-violet-glow));
+  border: 1px solid var(--accent-sakura);
+  font-weight: 800;
+}
+
+.wave-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 18px;
+}
+
+.wave-bars span {
+  width: 3px;
+  border-radius: 2px;
+  background: var(--accent-sakura);
+  height: 100%;
+}
+
+/* Hypercorrection 2.4s Imprint Overlay */
+.hypercorrection-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  border-radius: var(--radius-xl);
+  background: rgba(9, 12, 28, 0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  color: #fdf4f8;
+}
+
+.hc-badge {
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(251, 113, 133, 0.28);
+  border: 1px solid #fb7185;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.hc-emoji {
+  font-size: 2.3rem;
+  line-height: 1.1;
+}
+
+.hc-word-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hc-word {
+  font-family: var(--font-jp);
+  font-size: 2.15rem;
+  font-weight: 900;
+  line-height: 1.85;
+  color: #ff85b3;
+}
+
+.hc-word rt {
+  color: #38bdf8;
+}
+
+.hc-meaning {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.hc-tip {
+  max-width: 480px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.10);
+  border-left: 3px solid #fbbf24;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   SCREEN 4: RESULT & ROUND FURIGANA REVIEW
+   ========================================================================== */
+.result-hero {
+  padding: 28px 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.result-rank-orb {
+  width: 106px;
+  height: 106px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 52%, #06b6d4 100%);
+  border: 3px solid rgba(255, 255, 255, 0.68);
+  box-shadow: 0 0 42px rgba(236, 72, 153, 0.58);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.result-stars {
+  font-size: 1.7rem;
+  color: var(--accent-gold);
+  letter-spacing: 4px;
+}
+
+.result-score-grid {
+  width: 100%;
+  max-width: 680px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.result-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.result-cta-row {
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.review-list-panel {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.review-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.review-panel-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.review-words-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+  gap: 10px;
+}
+
+.review-word-row {
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.review-word-row.is-missed {
+  border-left: 3px solid var(--accent-danger);
+}
+
+.review-word-row.is-cleared {
+  border-left: 3px solid var(--accent-emerald);
+}
+
+/* ==========================================================================
+   SCREEN 5: 500-WORD N5 PRISM CODEX
+   ========================================================================== */
+.codex-header {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.codex-top-bar,
+.codex-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.codex-title-group,
+.codex-top-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.codex-search-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.glass-search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 11px 16px;
+  border-radius: var(--radius-md);
+  background: var(--glass-input);
+  border: 1px solid var(--glass-border-strong);
+  font-size: 0.94rem;
+  color: var(--text-primary);
+}
+
+.codex-count-label {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.codex-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.codex-card {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.codex-jp-line {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  line-height: 1.85;
+}
+
+.codex-more-wrap {
+  text-align: center;
+  margin-top: 6px;
+}
+
+.box-pill {
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--glass-border);
+}
+
+.box-pill--3 {
+  color: var(--accent-emerald);
+  border-color: var(--accent-emerald);
+}
+
+.box-pill--1,
+.box-pill--2 {
+  color: var(--accent-sakura);
+  border-color: var(--accent-sakura);
+}
+
+/* ==========================================================================
+   MODALS: GOJUON (五十音図) CHEATSHEET & ACHIEVEMENTS
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(5, 8, 20, 0.76);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+}
+
+.modal-dialog {
+  width: 100%;
+  max-width: 660px;
+  max-height: 88dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-dialog--wide {
+  max-width: 780px;
+}
+
+.modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modal-title {
+  font-size: 1.18rem;
+  font-weight: 900;
+}
+
+.modal-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.modal-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid var(--glass-border);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.modal-foot-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.gojuon-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.gojuon-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gojuon-grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.gojuon-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.gojuon-cell {
+  padding: 8px 4px;
+  border-radius: var(--radius-sm);
+  background: var(--glass-bg-2);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 62px;
+  transition: transform 0.14s ease, border-color 0.14s ease, background-color 0.14s ease;
+}
+
+.gojuon-cell:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-sakura);
+  background: var(--glass-hover);
+}
+
+.gojuon-cell:active {
+  transform: scale(0.96);
+}
+
+.gojuon-cell--empty {
+  border-style: dashed;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.gojuon-char-main {
+  font-family: var(--font-jp);
+  font-size: 1.24rem;
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+.gojuon-char-sub {
+  font-family: var(--font-jp);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-sakura);
+}
+
+.gojuon-romaji {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.gojuon-section-label {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  margin-top: 4px;
+}
+
+.gojuon-rule-card {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+  gap: 10px;
+}
+
+.ach-card {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.48;
+}
+
+.ach-card.is-unlocked {
+  opacity: 1;
+  border-color: var(--accent-gold);
+}
+
+/* Floating Score & Toasts */
+.toast-container {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  left: 18px;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.glass-toast {
+  max-width: 100%;
+  padding: 11px 16px;
+  border-radius: var(--radius-md);
+  background: var(--glass-bg-3);
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+  border: 1px solid var(--accent-sakura);
+  box-shadow: var(--glass-shadow);
+  font-size: 0.88rem;
+  font-weight: 800;
+  pointer-events: auto;
+}
+
+.floating-score {
+  position: fixed;
+  z-index: 65;
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--accent-gold);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.58);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Responsive Mobile Optimization (360x640 Zero Horizontal Overflow Guaranteed)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .nav-hide-md {
+    display: none;
+  }
+  .lobby-hero {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+  .mode-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .result-score-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .app-shell {
+    padding: 8px 10px 26px;
+    gap: 12px;
+  }
+  .top-nav {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+  .brand-gem {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+  .brand-title {
+    font-size: 0.92rem;
+  }
+  .brand-sub,
+  .nav-hide-sm,
+  .battle-shortcut-pill {
+    display: none;
+  }
+  .nav-stats .glass-pill {
+    padding: 4px 7px;
+    font-size: 0.74rem;
+  }
+  .btn-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 0.95rem;
+  }
+  .btn-compact {
+    padding: 6px 8px;
+    font-size: 0.78rem;
+  }
+  .study-header,
+  .worldmap-panel,
+  .codex-header,
+  .review-list-panel {
+    padding: 14px 12px;
+  }
+  .seg-tab {
+    padding: 6px 9px;
+    font-size: 0.76rem;
+  }
+  .mc-options-grid {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+  .mc-option-btn {
+    padding: 12px 14px;
+    min-height: 54px;
+    font-size: 0.98rem;
+  }
+  .hud-bars {
+    grid-template-columns: 1fr 92px;
+  }
+  .battle-stage {
+    padding: 14px 12px;
+    gap: 14px;
+    min-height: auto;
+  }
+  .pair-matrix {
+    gap: 8px;
+  }
+  .pair-tile {
+    padding: 8px 6px;
+    min-height: 48px;
+    font-size: 0.86rem;
+  }
+  .kana-slot,
+  .letter-slot {
+    min-width: 40px;
+    height: 44px;
+    font-size: 1.12rem;
+  }
+  .kana-shard,
+  .letter-shard {
+    min-width: 42px;
+    height: 44px;
+    padding: 0 7px;
+    font-size: 1.06rem;
+  }
+  .rounds-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .round-tile {
+    padding: 11px;
+  }
+  .codex-grid {
+    grid-template-columns: 1fr;
+  }
+  .modal-backdrop {
+    padding: 8px;
+  }
+  .modal-dialog {
+    padding: 14px 12px;
+  }
+  .gojuon-grid-5,
+  .gojuon-grid-3 {
+    gap: 5px;
+  }
+  .gojuon-cell {
+    min-height: 54px;
+    padding: 5px 2px;
+  }
+  .gojuon-char-main {
+    font-size: 1.06rem;
+  }
+}

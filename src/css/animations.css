@@ -1,0 +1,210 @@
+/* ==========================================================================
+   PRISM NIHONGO N5 — Sakura Aurora & Tactile Combat Motion System
+   Exclusive Owner: @n5-ui-artist
+   ========================================================================== */
+
+/* Living Sakura Aurora Orbs */
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6vw, 5vh, 0) scale(1.12); }
+}
+
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-7vw, 6vh, 0) scale(1.08); }
+}
+
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(5vw, -6vh, 0) scale(1.14); }
+}
+
+@keyframes orbFloat4 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-5vw, -4vh, 0) scale(1.10); }
+}
+
+.aurora-orb--1 { animation: orbFloat1 18s ease-in-out infinite; }
+.aurora-orb--2 { animation: orbFloat2 22s ease-in-out infinite; }
+.aurora-orb--3 { animation: orbFloat3 20s ease-in-out infinite; }
+.aurora-orb--4 { animation: orbFloat4 16s ease-in-out infinite; }
+
+/* Sakura Fever Overdrive Accelerates Aurora & Pulses Stage */
+body.is-fever .aurora-orb--1 { animation-duration: 6s; }
+body.is-fever .aurora-orb--2 { animation-duration: 7s; }
+body.is-fever .aurora-orb--3 { animation-duration: 6.5s; }
+body.is-fever .aurora-orb--4 { animation-duration: 5.5s; }
+
+@keyframes sakuraFeverPulse {
+  0%, 100% {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38),
+      0 0 26px -4px rgba(236, 72, 153, 0.45),
+      0 18px 44px -10px rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 133, 179, 0.58);
+  }
+  50% {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.52),
+      0 0 40px -2px rgba(251, 191, 36, 0.55),
+      0 18px 44px -10px rgba(0, 0, 0, 0.6);
+    border-color: rgba(251, 191, 36, 0.72);
+  }
+}
+
+body.is-fever .battle-stage {
+  animation: sakuraFeverPulse 1.35s ease-in-out infinite;
+}
+
+/* Screen & Element Entrances */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes scalePopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.screen-view.is-active {
+  animation: fadeSlideUp 0.26s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-pop {
+  animation: scalePopIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Tactile Combat Feedback */
+@keyframes correctPulse {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.035); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-7px); }
+  40% { transform: translateX(7px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+
+@keyframes comboBounce {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.22); }
+  100% { transform: scale(1); }
+}
+
+.mc-option-btn.is-correct,
+.kana-slot.is-correct,
+.letter-slot.is-correct {
+  animation: correctPulse 0.32s ease;
+}
+
+.mc-option-btn.is-wrong,
+.pair-tile.is-mismatch,
+.kana-slot.is-wrong,
+.letter-slot.is-wrong,
+.anim-shake {
+  animation: wrongShake 0.36s ease;
+}
+
+.anim-combo {
+  animation: comboBounce 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Urgent Timer Heartbeat */
+@keyframes urgentPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.ring-timer.is-urgent {
+  animation: urgentPulse 0.7s ease-in-out infinite;
+}
+
+/* Listening Wave Equalizer */
+@keyframes audioWaveBar {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1); }
+}
+
+.wave-bars span:nth-child(1) { animation: audioWaveBar 0.75s ease-in-out infinite 0.00s; }
+.wave-bars span:nth-child(2) { animation: audioWaveBar 0.75s ease-in-out infinite 0.14s; }
+.wave-bars span:nth-child(3) { animation: audioWaveBar 0.75s ease-in-out infinite 0.28s; }
+.wave-bars span:nth-child(4) { animation: audioWaveBar 0.75s ease-in-out infinite 0.10s; }
+.wave-bars span:nth-child(5) { animation: audioWaveBar 0.75s ease-in-out infinite 0.22s; }
+
+/* Floating Score Rise */
+@keyframes floatScoreUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, 6px, 0) scale(0.85);
+  }
+  20% {
+    opacity: 1;
+    transform: translate3d(-50%, -8px, 0) scale(1.08);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-50%, -48px, 0) scale(0.96);
+  }
+}
+
+.floating-score {
+  animation: floatScoreUp 0.92s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Toast Notification */
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translate3d(20px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.glass-toast {
+  animation: toastSlideIn 0.24s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Shimmer Highlight on Sakura Prism CTA */
+@keyframes prismShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.btn-prism {
+  background-size: 200% 200%;
+  animation: prismShimmer 5s ease infinite;
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
